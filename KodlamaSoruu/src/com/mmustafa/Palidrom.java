@@ -4,10 +4,11 @@ import java.util.Scanner;
 
 public class Palidrom {
 	static int v = 0, c = 0, r = 0;
-	static boolean b = false;
+	static boolean b = false, b1 = false;
 	
 	public static String palindromeTamamlayiciSayi(String sayi) {
 		b = false;
+		b1 = false;
 		int[] list = new int[sayi.length()];
 		
 		try {
@@ -74,7 +75,13 @@ public class Palidrom {
 		StringBuilder builder = new StringBuilder();
 		StringBuilder builder3 = new StringBuilder();
 		for (int i = 0; i < result.length; i++) {
-			builder.append(Integer.toString(result[i]));
+			if (result[i] != 0) {
+				b1 = true;
+			}
+			if (b1) {
+				builder.append(Integer.toString(result[i]));
+			}
+			
 			builder3.append(cloneAnswer[i]);
 		}
 		StringBuilder builder2 = new StringBuilder();

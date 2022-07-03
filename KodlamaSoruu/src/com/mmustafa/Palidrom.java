@@ -9,6 +9,9 @@ public class Palidrom {
 	public static String palindromeTamamlayiciSayi(String sayi) {
 		b = false;
 		b1 = false;
+		c = 0;
+		r = 0;
+		v = 0;
 		int[] list = new int[sayi.length()];
 		
 		try {
@@ -31,12 +34,21 @@ public class Palidrom {
 				}
 			}
 			if (b) {
+				System.out.println("List:");
+				for (int i = 0; i < list.length; i++) {
+					System.out.print(list[i] + ",");
+				}
+				System.out.println("ListClone:");
+				for (int i = 0; i < listClone.length; i++) {
+					System.out.print(listClone[i] + ",");
+				}
+				System.out.println(" ");
 				break;
 			}
 			
 			if (c > 0) {
 				if (list[v] > 9) {
-					list[v] = (list[v] - 9);
+					list[v] = (list[v] - 10);
 					if (v > 0) {
 						list[v - 1] = (list[v - 1] + 1);
 					}
@@ -75,7 +87,7 @@ public class Palidrom {
 		StringBuilder builder = new StringBuilder();
 		StringBuilder builder3 = new StringBuilder();
 		for (int i = 0; i < result.length; i++) {
-			if (result[i] != 0) {
+			if (result[i] != 0 || i == result.length - 1) {
 				b1 = true;
 			}
 			if (b1) {
@@ -103,7 +115,7 @@ public class Palidrom {
 			System.out.println("**********SONUC**************");
 			
 			System.out.println(palindromeTamamlayiciSayi(value));
-			
+			System.gc();
 			System.out.println("Cikis icin exit yaziniz: ");
 			System.out.println("\n***************YENI DEGER***********************");
 			

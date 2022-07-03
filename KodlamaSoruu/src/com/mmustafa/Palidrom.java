@@ -34,15 +34,7 @@ public class Palidrom {
 				}
 			}
 			if (b) {
-				System.out.println("List:");
-				for (int i = 0; i < list.length; i++) {
-					System.out.print(list[i] + ",");
-				}
-				System.out.println("ListClone:");
-				for (int i = 0; i < listClone.length; i++) {
-					System.out.print(listClone[i] + ",");
-				}
-				System.out.println(" ");
+				
 				break;
 			}
 			

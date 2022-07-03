@@ -6,7 +6,7 @@ public class Palidrom {
 	static int v = 0, c = 0, r = 0;
 	static boolean b = false;
 	
-	public static String palindromeTamamlayiciSayi(String sayi) throws Exception {
+	public static String palindromeTamamlayiciSayi(String sayi) {
 		b = false;
 		int[] list = new int[sayi.length()];
 		
@@ -90,15 +90,12 @@ public class Palidrom {
 			System.out.println("Lutfen Deger Giriniz : ");
 			String value = scanner.nextLine();
 			if (value.equals("exit")) {
-				break;
+				scanner.close();
+				System.exit(0);
 			}
 			System.out.println("**********SONUC**************");
-			try {
-				System.out.println(palindromeTamamlayiciSayi(value));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
+			System.out.println(palindromeTamamlayiciSayi(value));
 			
 			System.out.println("Cikis icin exit yaziniz: ");
 			System.out.println("\n***************YENI DEGER***********************");

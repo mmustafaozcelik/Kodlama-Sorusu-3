@@ -3,38 +3,84 @@ package com.mmustafa;
 import java.util.Scanner;
 
 public class Palidrom {
-	static int a = 0, result = 0;
+	static int v = 0, c = 0, r = 0;
+	static boolean b = false;
 	
-	public static String palindromeTamamlayiciSayi(String sayi) {
+	public static String palindromeTamamlayiciSayi(String sayi) throws Exception {
+		b = false;
+		int[] list = new int[sayi.length()];
 		
 		try {
-			a = Integer.parseInt(sayi);
+			for (int i = 0; i < sayi.length(); i++) {
+				list[i] = Integer.parseInt(Character.toString(sayi.charAt(i)));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "Bu Format Desteklenmemektedir :/ ";
+			return "hatali giris";
 		}
-		for (int i = 0;; i++) {
-			
-			int r, sum = 0, temp;
-			int n = a + i;
-			
-			temp = n;
-			while (n > 0) {
-				r = n % 10;
-				sum = (sum * 10) + r;
-				n = n / 10;
+		int[] listClone = list.clone();
+		for (;;) {
+			for (int i = 0, j = list.length - 1; i < list.length; i++, j--) {
+				if (list[i] != list[j]) {
+					break;
+				} else if (list.length - 1 == i) {
+					b = true;
+					break;
+					
+				}
 			}
-			if (temp == sum) {
-				result = i;
+			if (b) {
 				break;
 			}
 			
+			if (c > 0) {
+				if (list[v] > 9) {
+					list[v] = (list[v] - 9);
+					if (v > 0) {
+						list[v - 1] = (list[v - 1] + 1);
+					}
+					
+				} else {
+					
+					list[v] = (list[v] + 1);
+					
+				}
+				
+			}
+			
+			for (int i = 0, j = list.length - 1; i < list.length; i++, j--) {
+				if (list[i] != list[j]) {
+					v = j;
+					c++;
+					break;
+				}
+			}
+			
+		}
+		int[] result = new int[sayi.length()];
+		int[] cloneAnswer = list.clone();
+		r = 0;
+		for (int i = (result.length - 1); i >= 0; i--) {
+			if ((list[i] - listClone[i]) < 0) {
+				r = i - 1;
+				result[i] += (10 - Math.abs(list[i] - listClone[i]));
+				list[r] = list[r] - 1;
+			} else {
+				result[i] = result[i] + (list[i] - listClone[i]);
+			}
+			
+			// System.out.print(result[i] + " res ");
 		}
 		StringBuilder builder = new StringBuilder();
-		builder.append("(" + Integer.toString(a)).append(" + ").append(Integer.toString(result))
-				.append(" sonucunda olusan ").append(Integer.toString(a + result)).append(" palindromdur.)");
-		
-		return builder.toString();
+		StringBuilder builder3 = new StringBuilder();
+		for (int i = 0; i < result.length; i++) {
+			builder.append(Integer.toString(result[i]));
+			builder3.append(cloneAnswer[i]);
+		}
+		StringBuilder builder2 = new StringBuilder();
+		builder2.append("(" + sayi).append(" + ").append(builder.toString()).append(" sonucunda olusan ")
+				.append(builder3.toString()).append(" palindromdur.)");
+		return builder2.toString();
 	}
 	
 	public static void main(String[] args) {
@@ -47,9 +93,15 @@ public class Palidrom {
 				break;
 			}
 			System.out.println("**********SONUC**************");
-			System.out.println(palindromeTamamlayiciSayi(value));
-			System.out.println("\n***************YENI DEGER***********************");
+			try {
+				System.out.println(palindromeTamamlayiciSayi(value));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			System.out.println("Cikis icin exit yaziniz: ");
+			System.out.println("\n***************YENI DEGER***********************");
 			
 		}
 		
